@@ -1,6 +1,11 @@
 <?php
 
 require 'post.php';
+$data = explode( ',', $data );
+
+$lat = $data[0];
+$lon = $data[1];
+$alt = $data[2];
 
 $text = 'New Iridium post received at ' . $transmit_time;
 $attachments = array(
@@ -8,8 +13,14 @@ $attachments = array(
 		'color' => '#3498DB',
 		'fields' => array(
 			array(
-				'title' => 'GPS information',
-				'value' =>  '*Position* ' . $data[0] . ' N, ' . $data[1] . ' E\n*Altitude* ' . $data[2] . ' m'
+				'title' => 'GPS coordinates',
+				'value' => $lat . ", " . $lon,
+				'short' => true 
+			),
+			array(
+				'title' => 'Altitude',
+				'value' => $alt . " m",
+				'short' => true
 			)
 		)
 	),
@@ -18,7 +29,7 @@ $attachments = array(
 		'fields' => array(
 			array(
 				'title' => 'Follow live!',
-				'value' => '<https://dev.coderagora.com/iridium/|Live tracking>\n<https://www.google.com/maps/@' . $data[0] . ',@' . $data[1] . ',15z|Google Maps>'
+				'value' => "<https://dev.coderagora.com/iridium/|Iridium Live Tracking>\n<https://www.google.com/maps/place/" . $lat . "+" . $lon . "|Google Maps>"
 			)
 		)
 	)
