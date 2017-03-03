@@ -13,7 +13,7 @@ $attachments = array(
 		'color' => '#3498DB',
 		'fields' => array(
 			array(
-				'title' => 'GPS coordinates',
+				'title' => 'GPS position',
 				'value' => $lat . ", " . $lon,
 				'short' => true 
 			),
@@ -34,18 +34,21 @@ $attachments = array(
 		)
 	)
 );
+
 $json_data = json_encode( array( 'text' => $text, 'attachments' => $attachments ) );
-print_r( $text );
-print_r( $attachments );
 print_r( $json_data );
 
-$ch = curl_init( 'https://hooks.slack.com/services/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' );
-curl_setopt( $ch, CURLOPT_POST, true );
-curl_setopt( $ch, CURLOPT_POSTFIELDS, $json_data );
-curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, true );
-curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-	'Content-Type: application/json',
-	'Content-Length: ' . strlen( $json_data )
-));
-curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-curl_exec( $ch );
+$urls = array( 'https://hooks.slack.com/services/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', 'https://hooks.slack.com/services/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' );
+
+foreach ( $urls as $url ) {
+	$ch = curl_init( $url );
+	curl_setopt( $ch, CURLOPT_POST, true );
+	curl_setopt( $ch, CURLOPT_POSTFIELDS, $json_data );
+	curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, true );
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+		'Content-Type: application/json',
+		'Content-Length: ' . strlen( $json_data )
+	));
+	curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+	curl_exec( $ch );
+}
