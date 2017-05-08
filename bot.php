@@ -6,6 +6,11 @@ $data = explode( ',', $data );
 $lat = $data[0];
 $lon = $data[1];
 $alt = $data[2];
+$Tin = $data[3];
+$Tex = $data[4];
+$alb = $data[5];
+$gps = $data[6];
+$chk = $data[7];
 
 $text = 'New Iridium post received at ' . $transmit_time;
 $attachments = array(
@@ -20,6 +25,31 @@ $attachments = array(
 			array(
 				'title' => 'Altitude',
 				'value' => $alt . " m",
+				'short' => true
+			),
+			array(
+				'title' => 'Interior Temperature',
+				'value' => $Tin . " C",
+				'short' => true
+			),
+			array(
+				'title' => 'Exterior Temperature',
+				'value' => $Tex . " C",
+				'short' => true
+			),
+			array(
+				'title' => 'Barometric Altitude',
+				'value' => $alb . " m",
+				'short' => true
+			),
+			array(
+				'title' => 'Number of GPS satellites',
+				'value' => $gps,
+				'short' => true
+			),
+			array(
+				'title' => 'Check',
+				'value' => $chk,
 				'short' => true
 			)
 		)
